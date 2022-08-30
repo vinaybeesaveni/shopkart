@@ -1,0 +1,74 @@
+.card{
+    background-color: white;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px;
+    min-height: 200px;
+    width: 200px;
+    box-shadow: 10px 10px 10px rgb(232, 224, 224);
+  }
+
+  .card:hover{
+    background-color: rgb(243, 178, 58);
+
+  }
+  .image{
+    width: 100px;
+    height: 100px;
+    border-radius: 10px;
+  }
+  .title{
+    font-family: 'Bree Serif';
+    margin: 0;
+    font-size: 18px;
+  }
+  .description{
+    font-family: 'Roboto';
+    color: gray;
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 1px;
+    line-height: 1.5em;
+  }
+  .brand{
+    color: green;
+    font-family: 'Bree Serif';
+    font-size: 13px;
+    margin-top: 0;
+  }
+  .more{
+    color: black;
+    cursor: pointer;
+  }
+  .price-section{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+  .rating{
+    color: white;
+    background-color: rgb(73, 195, 73);
+    width: fit-content;
+    padding: 5px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: 'Bree Serif';
+    font-size: 14px;
+  }
+  .star{
+    margin-right: 5px;
+    width: 12px;
+    height: 12px;
+    margin-top: 3px;
+  }
+ .price{
+    color: black;
+    font-family: 'Bree Serif';
+    font-weight: 500;
+    font-size: 18px; 
+}
+ .rupees{
+    font-size: 12px;
+ }

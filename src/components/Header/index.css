@@ -1,0 +1,39 @@
+.logo{
+    color: white;
+    margin: 0;
+    font-weight: 500;
+    font-family: 'Bree Serif';
+    font-size: 25px;
+}
+.kart{
+    color: green;
+    font-style: italic;
+}
+.navbar{
+    background-color: burlywood;
+    padding: 10px 20px 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+.nav-list{
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 35%;
+  
+    
+}
+.link{
+    color: white;
+    font-family: 'Bree Serif';
+    text-decoration: none;
+    padding :5px 10px 5px 10px;
+}
+.link:hover{
+    background-color: green;
+    border-radius: 6px;
+}
