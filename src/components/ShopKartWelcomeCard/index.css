@@ -1,0 +1,45 @@
+.login-logo-container {
+  background-image: linear-gradient(
+    to bottom,
+    rgb(71, 149, 180),
+    rgb(74, 195, 236),
+    rgb(71, 149, 180)
+  );
+  width: 300px;
+  height: 350px;
+  border-radius: 10px;
+  padding: 10px;
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  margin-right: 50px;
+  box-shadow: 10px 10px 10px rgb(232, 224, 224);
+}
+.kart1 {
+  color: green;
+  font-style: italic;
+}
+.login-list {
+  padding: 0;
+  list-style: none;
+  margin: 0;
+}
+.groceries-icon {
+  color: white;
+  margin-top: 1px;
+  margin-right: 10px;
+}
+.groceries {
+  color: white;
+  font-family: "Bree Serif";
+  margin: 8px;
+}
+.groceries-list {
+  display: flex;
+  align-items: center;
+}
+.login-tag {
+  color: white;
+  font-family: "Roboto";
+  font-weight: 500;
+}

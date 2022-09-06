@@ -1,6 +1,14 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 import "./index.css";
+
 const Header = () => {
+  const navigate = useNavigate();
+  const onLogout = () => {
+    Cookies.remove("jwt-token");
+    navigate("/register");
+  };
+
   return (
     <nav className="navbar">
       <h1 className="logo">
@@ -17,15 +25,8 @@ const Header = () => {
             About
           </Link>
         </li>
-        <li>
-          <Link to="/login" className="link">
-            Login
-          </Link>
-        </li>
-        <li className="list-link">
-          <Link to="/register" className="link">
-            Register
-          </Link>
+        <li className="link" onClick={onLogout}>
+          Logout
         </li>
         <li>
           <Link to="/contact" className="link">

@@ -8,14 +8,17 @@
     box-shadow: 10px 10px 10px rgb(232, 224, 224);
   }
 
-  .card:hover{
+  .hover{
     background-color: rgb(243, 178, 58);
-
   }
   .image{
     width: 100px;
     height: 100px;
     border-radius: 10px;
+    box-shadow: 10px 10px 20px -1px rgb(232, 224, 224), -10px -10px 20px -1px rgb(232, 224, 224);
+  }
+  .onHover{
+    box-shadow: none;
   }
   .title{
     font-family: 'Bree Serif';

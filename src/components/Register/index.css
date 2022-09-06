@@ -1,0 +1,163 @@
+.register-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+}
+
+.form {
+  width: 30%;
+  box-shadow: -10px 0px 10px rgb(232, 224, 224);
+  border-radius: 10px;
+  padding: 20px;
+  padding-left: 30px;
+}
+.register-heading {
+  font-family: "Bree Serif";
+  font-weight: 400;
+  margin-top: 0;
+}
+.input {
+  border: none;
+  width: 100%;
+  outline: none;
+  font-weight: 400;
+  font-family: "Bree Serif";
+  font-size: 15px;
+}
+.input-container {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid black;
+  padding-bottom: 4px;
+  margin-top: 20px;
+  width: 90%;
+}
+.icon {
+  margin-right: 20px;
+  font-size: 25px;
+  margin-top: 3px;
+}
+.error-msg {
+  margin-top: 5px;
+  margin-bottom: 0;
+  color: red;
+  font-size: 11px;
+  font-family: "Bree Serif";
+}
+.sign-up-btn {
+  border: none;
+  background-color: black;
+  color: white;
+  font-family: "Bree Serif";
+  font-size: 15px;
+  width: 90px;
+  height: 35px;
+  border-radius: 6px;
+  margin-top: 20px;
+  cursor: pointer;
+}
+.cards {
+  position: relative;
+
+  height: 400px;
+  width: 400px;
+}
+.card1 {
+  width: 100px;
+  height: 150px;
+  background-image: white;
+  transform: rotateZ(-15deg);
+  position: absolute;
+  left: 8%;
+  top: 10%;
+  border-radius: 10px;
+  box-shadow: -10px -10px 10px rgb(247, 246, 246);
+  background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvjruK8xWPedO38qNfgUUzF6-X2wBjXIS7_g&usqp=CAU");
+  background-size: cover;
+}
+/* .card1:hover{
+    transform: rotate(0deg);
+    width: 200px;
+    height: 200px;
+} */
+.card2 {
+  width: 100px;
+  height: 150px;
+  position: absolute;
+  left: 50%;
+  border-radius: 10px;
+  top: 10%;
+  transform: rotate(-20deg);
+  box-shadow: -10px -10px 10px rgb(247, 246, 246);
+  background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRm6_tXJidWn3qbbwbC8NxkPyz4avvz_AU8_A&usqp=CAU");
+  background-size: cover;
+}
+.card3 {
+  background-color: green;
+  width: 100px;
+  height: 150px;
+  position: absolute;
+  left: 45%;
+  border-radius: 10px;
+  top: 10%;
+  transform: rotate(-30deg);
+}
+.card4 {
+  background-color: orange;
+  width: 100px;
+  height: 150px;
+  position: absolute;
+  left: 60%;
+  border-radius: 10px;
+  top: 10%;
+  transform: rotate(30deg);
+}
+.card5 {
+  background-color: black;
+  width: 100px;
+  height: 150px;
+  position: absolute;
+  left: 10%;
+  border-radius: 10px;
+  top: 40%;
+  transform: rotate(-30deg);
+}
+
+.card6 {
+  background-color: blue;
+  width: 100px;
+  height: 150px;
+  position: absolute;
+  left: 30%;
+  border-radius: 10px;
+  top: 40%;
+  transform: rotate(20deg);
+}
+.card7 {
+  background-color: rgb(142, 77, 84);
+  width: 100px;
+  height: 150px;
+  position: absolute;
+  left: 50%;
+  border-radius: 10px;
+  top: 40%;
+  transform: rotate(-20deg);
+}
+.card8 {
+  background-color: rgb(138, 212, 100);
+  width: 100px;
+  height: 150px;
+  position: absolute;
+  left: 60%;
+  border-radius: 10px;
+  top: 40%;
+  transform: rotate(30deg);
+}
+.shirt {
+  width: 100px;
+  height: 150px;
+  border-radius: 10px;
+  background-size: cover;
+}
