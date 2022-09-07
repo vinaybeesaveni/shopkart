@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
+import { ThreeDots } from "react-loader-spinner";
 import Cookies from "js-cookie";
 import axios from "axios";
 import RenderProduct from "../RenderProduct";
 import "./index.css";
 import Header from "../Header";
+import Footer from "../Footer";
 
 export interface IData {
   id: number;
@@ -16,8 +18,17 @@ export interface IData {
   price: number;
 }
 
+const apiStatusConstants = {
+  initial: "INITIAL",
+  success: "SUCCESS",
+  failure: "FAILURE",
+  loading: "LOADING",
+};
+
 function Home() {
   const [data, setData] = useState<IData[]>([]);
+  const [paginationValue, setPagination] = useState(15);
+  const [apiStatus, setApiStatus] = useState(apiStatusConstants.initial);
 
   const renderData = (data: IData[]) => {
     setData(data);
@@ -25,11 +36,13 @@ function Home() {
   const jwtToken = Cookies.get("jwt-token");
 
   useEffect(() => {
+    setApiStatus(apiStatusConstants.loading);
     const getData = () => {
       axios({
         method: "get",
         url: "https://dummyjson.com/products",
       }).then((response) => {
+        console.log(response);
         const data = response.data.products.map((each: IData) => {
           return {
             id: each.id,
@@ -41,15 +54,65 @@ function Home() {
             price: each.price,
           };
         });
-        renderData(data);
+        if (response.statusText === "OK") {
+          renderData(data);
+          setApiStatus(apiStatusConstants.success);
+        } else {
+          setApiStatus(apiStatusConstants.failure);
+        }
       });
     };
     getData();
   }, []);
 
+  const changePagination = () => {
+    setPagination((prevState) => prevState + 15);
+  };
+
   if (jwtToken === undefined) {
-    return <Navigate to="/register" />;
+    return <Navigate to="/login" />;
   }
+
+  const renderSuccessView = () => (
+    <div className="home-container">
+      <ul className="list">
+        {data.slice(0, paginationValue).map((each: IData) => (
+          <RenderProduct each={each} key={each.id} />
+        ))}
+      </ul>
+      {paginationValue !== data.length && (
+        <button className="view-more-btn" onClick={changePagination}>
+          View More
+        </button>
+      )}
+    </div>
+  );
+
+  const renderLoadingView = () => (
+    <div className="loader-container">
+      <ThreeDots
+        height="80"
+        width="60"
+        radius="5"
+        color="black"
+        ariaLabel="three-dots-loading"
+      />
+    </div>
+  );
+  const renderFailureView = () => <p>Failure View</p>;
+
+  const renderPage = () => {
+    switch (apiStatus) {
+      case apiStatusConstants.success:
+        return renderSuccessView();
+      case apiStatusConstants.loading:
+        return renderLoadingView();
+      case apiStatusConstants.failure:
+        return renderFailureView();
+      default:
+        return null;
+    }
+  };
 
   return (
     <>
@@ -60,12 +123,9 @@ function Home() {
           <p className="tag">Get Your orders delivered in 48 hours</p>
           <button className="shop-now-btn">Shop Now</button>
         </div>
-        <ul className="list">
-          {data.map((each: IData) => (
-            <RenderProduct each={each} key={each.id} />
-          ))}
-        </ul>
+        {renderPage()}
       </div>
+      <Footer />
     </>
   );
 }

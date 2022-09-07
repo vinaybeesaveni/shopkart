@@ -1,39 +1,53 @@
-.logo{
-    color: white;
-    margin: 0;
-    font-weight: 500;
-    font-family: 'Bree Serif';
-    font-size: 25px;
+.logo {
+  color: white;
+  margin: 0;
+  font-weight: 500;
+  font-family: "Bree Serif";
+  font-size: 25px;
 }
-.kart{
-    color: green;
-    font-style: italic;
+.kart {
+  color: green;
+  font-style: italic;
 }
-.navbar{
-    background-color: burlywood;
-    padding: 10px 20px 10px 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
+.navbar {
+  /* background-image: linear-gradient(
+    to bottom,
+    rgb(51, 145, 216),
+    rgb(138, 185, 219)
+  ); */
+  background-color: rgb(45, 11, 60);
+  padding: 15px 20px 15px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
-.nav-list{
-    list-style-type: none;
-    padding: 0;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 35%;
-  
-    
+.nav-list {
+  margin: 0;
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 25%;
 }
-.link{
-    color: white;
-    font-family: 'Bree Serif';
-    text-decoration: none;
-    padding :5px 10px 5px 10px;
+.link {
+  color: white;
+  font-family: "Bree Serif";
+  text-decoration: none;
+  padding: 5px 10px 5px 10px;
 }
-.link:hover{
-    background-color: green;
-    border-radius: 6px;
+.link:hover {
+  background-color: green;
+  border-radius: 6px;
+}
+.logout-btn {
+  background-color: green;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  height: 32px;
+  width: 75px;
+  font-family: "Bree Serif";
+  cursor: pointer;
+  font-size: 15px;
 }

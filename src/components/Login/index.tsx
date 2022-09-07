@@ -1,9 +1,11 @@
 import { AiFillPhone } from "react-icons/ai";
-import { useState, ChangeEvent } from "react";
+import { useState, ChangeEvent, FormEvent } from "react";
 import { RiLockPasswordFill } from "react-icons/ri";
 import "./index.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, Navigate } from "react-router-dom";
+import axios from "axios";
 import Cookies from "js-cookie";
+import { GiConsoleController } from "react-icons/gi";
 const initialValues = {
   loginPhoneNumber: "",
   loginPassword: "",
@@ -31,14 +33,27 @@ const Login = () => {
     setFormValues({ ...formValues, [name]: value });
   };
 
-  const onFormSubmit = () => {
-    Cookies.set("jwt-token", "asassas", { expires: 30 });
-    navigate("/");
+  const onFormSubmit = (event: FormEvent) => {
+    event?.preventDefault();
+    const data = { username: "rahul", password: "rahul@2021" };
+    axios({
+      method: "POST",
+      url: "https://apis.ccbp.in/login",
+      data: JSON.stringify(data),
+    })
+      .then((response) => {
+        const jwtToken = response.data.jwt_token;
+        Cookies.set("jwt-token", jwtToken, { expires: 30 });
+        navigate("/");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
-  const jwtToken = Cookies.get("jwt-token");
-  if (jwtToken !== undefined) {
-    navigate("/");
+  const jwt = Cookies.get("jwt-token");
+  if (jwt !== undefined) {
+    return <Navigate to="/" />;
   }
 
   return (

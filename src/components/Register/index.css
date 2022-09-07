@@ -58,6 +58,12 @@
   margin-top: 20px;
   cursor: pointer;
 }
+.login-link {
+  font-family: "Bree Serif";
+  font-weight: 400;
+  margin-top: 0;
+  margin-top: 20px;
+}
 .cards {
   position: relative;
 

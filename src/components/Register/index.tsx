@@ -6,7 +6,7 @@ import { RiLockPasswordFill } from "react-icons/ri";
 
 import "./index.css";
 import Cookies from "js-cookie";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import ShopKartWelcomeCard from "../ShopKartWelcomeCard";
 
 const initialValues = {
@@ -81,7 +81,7 @@ const Register2 = () => {
     if (value === "") {
       error = "Required";
     } else if (!re.test(value.toLocaleLowerCase())) {
-      error = "Not A Valid Format";
+      error = "Not a valid format";
     } else {
       error = "";
       validation.email = true;
@@ -99,7 +99,7 @@ const Register2 = () => {
       error = "Required";
     } else if (!re.test(value)) {
       error =
-        "Password Should contain atleast one Lowercase, uppercase, number, special charactet with minimum length 8";
+        "Password should contain atleast one lowercase, uppercase, number, special character with minimum length 8";
     } else {
       error = "";
       validation.password = true;
@@ -144,7 +144,7 @@ const Register2 = () => {
   };
 
   const jwtToken = Cookies.get("jwt-token");
-  if (jwtToken !== undefined) {
+  if (!jwtToken) {
     return <Navigate to="/" />;
   }
 
@@ -228,6 +228,9 @@ const Register2 = () => {
         <button type="submit" className="sign-up-btn">
           Sign Up
         </button>
+        <p className="login-link">
+          Already have an acount ? <Link to="/login">Login here</Link>
+        </p>
       </form>
       {/* <div className="cards">
         <div className="card1"></div>
