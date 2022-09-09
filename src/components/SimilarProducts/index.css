@@ -1,0 +1,115 @@
+.similar-product-card {
+  height: 430px;
+  width: 250px;
+  background-color: white;
+  margin-right: 20px;
+}
+.similar-product-img {
+  width: 100%;
+  height: 200px;
+}
+.similar-products-details-container {
+  padding: 10px;
+}
+.similar-product-title {
+  font-family: "Bree Serif";
+  font-size: 20px;
+  font-weight: 300;
+  margin-top: 0;
+  margin-bottom: 3px;
+}
+.similar-product-brand {
+  color: green;
+  font-family: "Bree Serif";
+  margin-top: 0;
+  font-size: 13px;
+}
+.similar-product-description {
+  font-family: "Roboto";
+  color: gray;
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 1px;
+  line-height: 1.5em;
+}
+.similar-product-price-rating-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.similar-product-price {
+  font-family: "Bree Serif";
+  color: #b12704;
+  font-size: 20px;
+  margin: 0;
+}
+.similar-product-rating {
+  display: flex;
+  align-items: center;
+  font-family: "Bree Serif";
+  color: green;
+  margin: 0;
+}
+.similar-product-rating-icon {
+  color: rgb(236, 236, 8);
+  margin-top: 2px;
+  margin-right: 3px;
+}
+.similar-product-icons-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+.cart-container {
+  width: 37px;
+  height: 37px;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 5px 10px 10px -10px rgb(222, 207, 207),
+    -5px -10px 10px -10px rgb(222, 207, 207);
+  border: 1px solid rgb(237, 233, 233);
+}
+
+.wishlist-container {
+  width: 37px;
+  height: 37px;
+  background-color: white;
+  padding-top: 2px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 5px 10px 10px -10px rgb(222, 207, 207),
+    -5px -10px 10px -10px rgb(222, 207, 207);
+  border: 1px solid rgb(237, 233, 233);
+}
+.buy-now-container {
+  width: 37px;
+  height: 37px;
+  background-color: white;
+  display: flex;
+  padding-top: 2px;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 5px 10px 10px -10px rgb(222, 207, 207),
+    -5px -10px 10px -10px rgb(222, 207, 207);
+  border: 1px solid rgb(237, 233, 233);
+}
+.cart-container:hover,
+.buy-now-container:hover,
+.wishlist-container:hover {
+  background-color: lightblue;
+}
+.similar-product-icon {
+  color: black;
+}

@@ -1,8 +1,9 @@
 .product-container {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: row;
+  align-items: flex-start;
   justify-content: flex-start;
+  flex-wrap: wrap;
   padding: 20px;
   background-color: aliceblue;
   min-height: 90vh;
@@ -10,8 +11,8 @@
 .product-card {
   width: 70%;
   height: 70vh;
-  box-shadow: 5px 5px 15px -10px rgb(97, 92, 92),
-    -5px -5px 15px -10px rgb(97, 92, 92);
+  /* box-shadow: 5px 5px 15px -10px rgb(97, 92, 92),
+    -5px -5px 15px -10px rgb(97, 92, 92); */
   padding: 20px;
   display: flex;
   background-color: white;
@@ -23,7 +24,7 @@
 .product-image {
   width: 300px;
   height: 300px;
-  border-radius: 10px;
+  /* border-radius: 10px; */
 }
 .image-carousel-container {
   display: flex;
@@ -35,7 +36,7 @@
 .image-carousel {
   width: 65px;
   height: 65px;
-  border-radius: 5px;
+  /* border-radius: 5px; */
   opacity: 0.5;
 }
 .product-details-container {
@@ -130,9 +131,37 @@
   margin-bottom: 25px;
   max-width: 85%;
 }
+.view-less-btn {
+  color: black;
+  font-family: "Bree Serif";
+  cursor: pointer;
+}
+.availability {
+  color: brown;
+  font-family: "Bree Serif";
+  margin-bottom: 0;
+  margin-top: 5px;
+}
+.product-brand {
+  color: brown;
+  margin-top: 4px;
+  font-family: "Bree Serif";
+  margin-bottom: 0;
+}
+.availability-span {
+  color: black;
+  margin-left: 10px;
+}
+.brand-span {
+  color: black;
+  margin-left: 10px;
+}
 .add-to-cart-btn {
   height: 35px;
-  width: 100px;
+  width: 130px;
+  display: inline;
+  align-items: center;
+  justify-content: space-around;
   border-radius: 6px;
   background-image: linear-gradient(
     to right,
@@ -142,24 +171,160 @@
   color: white;
   border: none;
   font-family: "Bree Serif";
-  box-shadow: 10px 10px 20px 10px rgb(232, 224, 224),
-    -10px -10px 20px -1px rgb(232, 224, 224);
+  box-shadow: 10px 10px 10px -8px rgb(232, 224, 224),
+    -10px -10px 10px -8px rgb(232, 224, 224);
   font-size: 15px;
+  cursor: pointer;
 }
 .buy-now-btn {
   height: 35px;
-  width: 100px;
+  width: 110px;
+  display: inline;
+  align-items: center;
+  justify-content: space-around;
   border-radius: 6px;
-  background-image: linear-gradient(
-    to right,
+  /* background-image: linear-gradient(
+    to bottom,
     rgb(48, 149, 48),
     rgb(97, 234, 97)
-  );
+  ); */
+  background-color: rgb(61, 190, 89);
   color: white;
   border: none;
   font-family: "Bree Serif";
   margin-left: 20px;
-  box-shadow: 10px 10px 20px -1px rgb(232, 224, 224),
-    -10px -10px 20px -1px rgb(232, 224, 224);
+  box-shadow: 10px 10px 10px -8px rgb(232, 224, 224),
+    -10px -10px 10px -8px rgb(232, 224, 224);
   font-size: 15px;
+  cursor: pointer;
+}
+.add-to-cart-btn:hover {
+  background-image: linear-gradient(to bottom, black, black);
+}
+.buy-now-btn:hover {
+  background-color: green;
+}
+.details-container {
+  flex-grow: 1;
+  background-color: white;
+  margin-left: 20px;
+  height: 70vh;
+  padding: 20px;
+  max-width: 21.5%;
+}
+.product-price-heading {
+  margin-top: 0;
+  font-size: 25px;
+  font-weight: 500;
+  font-family: "Bree Serif";
+  color: #b12704;
+  margin-bottom: 0;
+}
+.premium-container {
+  display: flex;
+  align-items: center;
+}
+.premium {
+  color: #00a8e1;
+  font-family: "Bree Serif";
+  margin-top: 3px;
+}
+.premium-icon {
+  color: #00a8e1;
+  font-size: 15px;
+}
+.delivery-by {
+  font-family: "Roboto";
+  font-weight: bold;
+  font-size: 14px;
+}
+.delivery-date {
+  color: black;
+  font-family: "Bree Serif";
+  margin-left: 10px;
+  letter-spacing: 0.5px;
+}
+.delivery-address {
+  display: flex;
+  align-items: flex-start;
+}
+.delivery-location-span {
+  color: #007185;
+  font-family: "Roboto";
+  font-weight: bold;
+  font-size: 14px;
+  margin: 0;
+}
+.delivery-location-icon {
+  margin-right: 5px;
+  margin-top: 2px;
+  color: #007185;
+}
+.delivery-availability {
+  font-family: "Bree Serif";
+  font-weight: 300;
+  color: green;
+}
+.product-style {
+  max-width: 250px;
+  font-family: "Roboto";
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+}
+.quantity {
+  margin-left: 10px;
+  border: 1px solid black;
+  outline: none;
+  height: 25px;
+  border-radius: 2px;
+}
+.quantity-label {
+  font-family: "Bree Serif";
+}
+.wishlist-btn {
+  margin-top: 20px;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background-color: rgb(141, 141, 219);
+  color: white;
+  height: 30px;
+  border-radius: 6px;
+  width: 130px;
+}
+.heart-icon {
+  font-size: 18px;
+  color: pink;
+}
+.product-delivery-list {
+  padding-left: 15px;
+}
+.emi-item {
+  margin-bottom: 5px;
+  color: black;
+  letter-spacing: 0.5px;
+  font-size: 14px;
+  font-family: "Roboto";
+  font-weight: bold;
+  list-style-type: circle;
+}
+.similar-products-container {
+  width: 70%;
+}
+.similar-products-heading {
+  font-family: "Bree Serif";
+  font-size: 25px;
+  font-weight: 300;
+  letter-spacing: 0.5px;
+}
+.similar-product-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  width: 100%;
 }

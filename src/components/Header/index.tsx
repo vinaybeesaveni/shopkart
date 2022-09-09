@@ -11,9 +11,12 @@ const Header = () => {
 
   return (
     <nav className="navbar">
-      <h1 className="logo">
-        Shop<span className="kart">Kart</span>
-      </h1>
+      <Link to="/" style={{ textDecoration: "none" }}>
+        <h1 className="logo">
+          Shop<span className="kart">Kart</span>
+        </h1>
+      </Link>
+
       <ul className="nav-list">
         <li>
           <Link to="/about" className="link">
@@ -21,8 +24,8 @@ const Header = () => {
           </Link>
         </li>
         <li>
-          <Link to="/contact" className="link">
-            Contact
+          <Link to="/cart" className="link">
+            Cart
           </Link>
         </li>
         <li onClick={onLogout}>

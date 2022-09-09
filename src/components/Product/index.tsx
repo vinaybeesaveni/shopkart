@@ -1,13 +1,22 @@
 import axios from "axios";
 import Cookies from "js-cookie";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { ThreeDots } from "react-loader-spinner";
 import { BiStore } from "react-icons/bi";
-import { BsFillStarFill } from "react-icons/bs";
+import {
+  BsFillStarFill,
+  BsShieldFillCheck,
+  BsFillSuitHeartFill,
+  BsCartDashFill,
+} from "react-icons/bs";
+import { MdOutlineFlashOn } from "react-icons/md";
+import { HiOutlineLocationMarker } from "react-icons/hi";
 import Header from "../Header";
 import "./index.css";
 import SimilarProducts from "../SimilarProducts";
+import { cartContext } from "../../App";
+import Footer from "../Footer";
 
 export interface IProductData {
   title: string;
@@ -16,8 +25,21 @@ export interface IProductData {
   price: number;
   rating: number;
   totalReviews: number;
+  image_url: string;
+  availability: string;
+  brand: string;
+}
+
+export interface IProductData2 {
+  title: string;
+  style: String;
+  description: string;
+  price: string;
+  rating: number;
+  totalReviews: number;
   imageUrl: string;
   availability: string;
+  similarProducts: Array<IProductData>;
   brand: string;
 }
 
@@ -44,6 +66,15 @@ const Product = () => {
   const { id } = useParams();
   const [data, setData] = useState(initialValues);
   const [apiStatus, setApiStatus] = useState(apiStatusConstants.initial);
+  const [showMore, setShowMore] = useState(false);
+  const { changeCartList } = useContext(cartContext);
+
+  const date = new Date();
+  date.setDate(date.getDate() + 2);
+  console.log(date);
+  const day = date.toLocaleString("default", { weekday: "long" });
+  const dayDate = date.getDate();
+  const month = date.toLocaleString("default", { month: "long" });
 
   useEffect(() => {
     const jwtToken = Cookies.get("jwt-token");
@@ -74,17 +105,42 @@ const Product = () => {
     });
   }, [id]);
 
+  const changeShowMore = () => {
+    setShowMore((prevState) => !prevState);
+  };
+
+  const addToCart = () => {
+    changeCartList(data);
+  };
+
+  const quantityArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   const renderSuccessView = () => {
     return (
       <>
         <div className="product-card">
           <div className="product-images-container">
-            <img src={data.imageUrl} className="product-image" />
+            <img src={data.imageUrl} className="product-image" alt="carousel" />
             <div className="image-carousel-container">
-              <img src={data.imageUrl} className="image-carousel" />
-              <img src={data.imageUrl} className="image-carousel" />
-              <img src={data.imageUrl} className="image-carousel" />
-              <img src={data.imageUrl} className="image-carousel" />
+              <img
+                src={data.imageUrl}
+                className="image-carousel"
+                alt="carousel"
+              />
+              <img
+                src={data.imageUrl}
+                className="image-carousel"
+                alt="carousel"
+              />
+              <img
+                src={data.imageUrl}
+                className="image-carousel"
+                alt="carousel"
+              />
+              <img
+                src={data.imageUrl}
+                className="image-carousel"
+                alt="carousel"
+              />
             </div>
           </div>
           <div className="product-details-container">
@@ -109,19 +165,88 @@ const Product = () => {
                 <p className="discount">25% OFF</p>
               </div>
             </div>
-            <p className="product-description">{data.description}</p>
-            <button className="add-to-cart-btn">Add to Cart</button>
-            <button className="buy-now-btn">Buy Now</button>
+            <p className="availability">
+              Availability:
+              <span className="availability-span">{data.availability}</span>
+            </p>
+            <p className="product-brand">
+              Brand:
+              <span className="brand-span">{data.brand}</span>
+            </p>
+            <p className="product-description">
+              {showMore ? data.description : data.description.slice(0, 150)}
+              {showMore ? (
+                <span onClick={changeShowMore} className="view-less-btn">
+                  {" "}
+                  view less
+                </span>
+              ) : (
+                <span onClick={changeShowMore} className="view-less-btn">
+                  {" "}
+                  ...more
+                </span>
+              )}
+            </p>
+            <button className="add-to-cart-btn" onClick={addToCart}>
+              <BsCartDashFill /> Add to Cart
+            </button>
+            <button className="buy-now-btn">
+              <MdOutlineFlashOn /> Buy Now
+            </button>
           </div>
         </div>
-        {/* <h1>Similar Products</h1>
-        <div>
-          <ul>
+        <div className="details-container">
+          <p className="product-price-heading">Rs. {data.price}/-</p>
+          <div className="premium-container">
+            <span className="premium">Premium</span>
+            <BsShieldFillCheck className="premium-icon" />
+          </div>
+          <p className="delivery-by">
+            Delivery by
+            <span className="delivery-date">
+              {day}, {dayDate + " " + month}{" "}
+            </span>
+          </p>
+          <p className="delivery-address">
+            <HiOutlineLocationMarker className="delivery-location-icon" />
+            <span className="delivery-location-span">
+              Deliver to Vinay - Mandal, District, 555555
+            </span>
+          </p>
+          <p className="delivery-availability">{data.availability}</p>
+          <p className="product-style">
+            {data.style.slice(0, 100)}
+            <span> ...</span>
+          </p>
+          <div>
+            <label htmlFor="quantity" className="quantity-label">
+              Quantity :
+            </label>
+            <select id="quantity" className="quantity">
+              {quantityArray.map((item) => (
+                <option value={item}>{item}</option>
+              ))}
+            </select>
+          </div>
+          <button className="wishlist-btn">
+            Add to Wishlist <BsFillSuitHeartFill className="heart-icon" />
+          </button>
+          <ul className="product-delivery-list">
+            <li className="emi-item">
+              EMI starting from Rs. {Math.ceil(+data.price / 6)}/month
+            </li>
+            <li className="emi-item">Cash on delivery</li>
+            <li className="emi-item"> Secured transaction</li>
+          </ul>
+        </div>
+        <div className="similar-products-container">
+          <h1 className="similar-products-heading">Similar Products</h1>
+          <ul className="similar-product-list">
             {data.similarProducts.map((each: IProductData) => (
               <SimilarProducts each={each} />
             ))}
           </ul>
-        </div> */}
+        </div>
       </>
     );
   };
@@ -156,6 +281,7 @@ const Product = () => {
     <>
       <Header />
       <div className="product-container">{renderProduct()}</div>
+      <Footer />
     </>
   );
 };
