@@ -144,7 +144,7 @@ const Register2 = () => {
   };
 
   const jwtToken = Cookies.get("jwt-token");
-  if (!jwtToken) {
+  if (jwtToken) {
     return <Navigate to="/" />;
   }
 

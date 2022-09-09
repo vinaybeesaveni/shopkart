@@ -18,6 +18,16 @@ export interface IData {
   price: number;
 }
 
+export interface IProductData {
+  id: number;
+  title: string;
+  image_url: string;
+  description: string;
+  brand: string;
+  rating: number;
+  price: number;
+}
+
 const apiStatusConstants = {
   initial: "INITIAL",
   success: "SUCCESS",
@@ -40,21 +50,25 @@ function Home() {
     const getData = () => {
       axios({
         method: "get",
-        url: "https://dummyjson.com/products",
+        // url: "https://dummyjson.com/products",
+        url: "https://apis.ccbp.in/products?sort_by=PRICE_HIGH&category=&title_search=&rating=1",
+        headers: {
+          Authorization: `Bearer ${jwtToken}`,
+        },
       }).then((response) => {
         console.log(response);
-        const data = response.data.products.map((each: IData) => {
+        const data = response.data.products.map((each: IProductData) => {
           return {
             id: each.id,
             title: each.title,
-            thumbnail: each.thumbnail,
-            description: each.description,
+            thumbnail: each.image_url,
+            description: "Lorem ipsuma hsjasna sjhsnzmN zjhzjJZnj",
             brand: each.brand,
             rating: each.rating,
             price: each.price,
           };
         });
-        if (response.statusText === "OK") {
+        if (response.status === 200) {
           renderData(data);
           setApiStatus(apiStatusConstants.success);
         } else {
@@ -63,10 +77,14 @@ function Home() {
       });
     };
     getData();
-  }, []);
+  }, [jwtToken]);
 
   const changePagination = () => {
-    setPagination((prevState) => prevState + 15);
+    if (paginationValue + 15 > data.length) {
+      setPagination(data.length);
+    } else {
+      setPagination((prevState) => prevState + 15);
+    }
   };
 
   if (jwtToken === undefined) {

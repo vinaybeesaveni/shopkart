@@ -22,7 +22,10 @@ const RenderProduct = ({ each }: Props) => {
   };
 
   return (
-    <Link to="/product" style={{ textDecoration: "none", color: "inherit" }}>
+    <Link
+      to={`/product/${each.id}`}
+      style={{ textDecoration: "none", color: "inherit" }}
+    >
       <li
         className="card"
         id={`${each.id}`}
@@ -32,7 +35,7 @@ const RenderProduct = ({ each }: Props) => {
         <p className="title">
           {each.title.length < 15
             ? each.title
-            : each.title.substring(0, 20) + " ..."}
+            : each.title.substring(0, 19) + " ..."}
         </p>
         <p className="brand">{each.brand}</p>
         <img
@@ -50,8 +53,8 @@ const RenderProduct = ({ each }: Props) => {
             <AiFillStar className="star" /> {each.rating}
           </p>
           <p className="price">
-            <span className="dollars">$ </span>
-            {each.price}
+            <span className="dollars">Rs. </span>
+            {each.price} /-
           </p>
         </div>
       </li>
