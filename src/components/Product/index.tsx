@@ -1,6 +1,6 @@
 import axios from "axios";
 import Cookies from "js-cookie";
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState, useContext, ChangeEvent } from "react";
 import { useParams } from "react-router-dom";
 import { ThreeDots } from "react-loader-spinner";
 import { BiStore } from "react-icons/bi";
@@ -19,6 +19,7 @@ import { cartContext } from "../../App";
 import Footer from "../Footer";
 
 export interface IProductData {
+  id: number;
   title: string;
   style: String;
   description: string;
@@ -31,6 +32,7 @@ export interface IProductData {
 }
 
 export interface IProductData2 {
+  id: number;
   title: string;
   style: String;
   description: string;
@@ -41,9 +43,11 @@ export interface IProductData2 {
   availability: string;
   similarProducts: Array<IProductData>;
   brand: string;
+  quantity: number;
 }
 
 const initialValues = {
+  id: "",
   title: "",
   style: "",
   description: "",
@@ -63,15 +67,21 @@ const apiStatusConstants = {
 };
 
 const Product = () => {
+  const { state, setState } = useContext(cartContext);
+  // console.log(state);
   const { id } = useParams();
   const [data, setData] = useState(initialValues);
   const [apiStatus, setApiStatus] = useState(apiStatusConstants.initial);
   const [showMore, setShowMore] = useState(false);
-  const { changeCartList } = useContext(cartContext);
+  const [quantity, setQunatity] = useState(1);
+
+  const changeQuantity = (event: ChangeEvent<HTMLSelectElement>) => {
+    setQunatity(+event.target.value);
+  };
 
   const date = new Date();
   date.setDate(date.getDate() + 2);
-  console.log(date);
+  // console.log(date);
   const day = date.toLocaleString("default", { weekday: "long" });
   const dayDate = date.getDate();
   const month = date.toLocaleString("default", { month: "long" });
@@ -88,6 +98,7 @@ const Product = () => {
     }).then((response) => {
       const product = response.data;
       const data = {
+        id: product.id,
         price: product.price,
         title: product.title,
         description: product.description,
@@ -99,7 +110,6 @@ const Product = () => {
         imageUrl: product.image_url,
         similarProducts: product.similar_products,
       };
-      console.log(data.similarProducts);
       setData(data);
       setApiStatus(apiStatusConstants.success);
     });
@@ -110,8 +120,14 @@ const Product = () => {
   };
 
   const addToCart = () => {
-    changeCartList(data);
+    const found = state.cartList.find(
+      (each: IProductData2) => each.id === +data.id
+    );
+    if (!found) {
+      setState({ cartList: [...state.cartList, { ...data, quantity }] });
+    }
   };
+  // console.log(state);
 
   const quantityArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   const renderSuccessView = () => {
@@ -222,7 +238,12 @@ const Product = () => {
             <label htmlFor="quantity" className="quantity-label">
               Quantity :
             </label>
-            <select id="quantity" className="quantity">
+            <select
+              id="quantity"
+              className="quantity"
+              onChange={changeQuantity}
+              value={quantity}
+            >
               {quantityArray.map((item) => (
                 <option value={item}>{item}</option>
               ))}
@@ -243,7 +264,7 @@ const Product = () => {
           <h1 className="similar-products-heading">Similar Products</h1>
           <ul className="similar-product-list">
             {data.similarProducts.map((each: IProductData) => (
-              <SimilarProducts each={each} />
+              <SimilarProducts each={each} key={each.id} />
             ))}
           </ul>
         </div>
@@ -252,7 +273,7 @@ const Product = () => {
   };
 
   const renderLoadingView = () => (
-    <div className="loader-container">
+    <div className="product-loader-container">
       <ThreeDots
         height="80"
         width="60"

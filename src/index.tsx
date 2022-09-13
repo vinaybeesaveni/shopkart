@@ -6,7 +6,6 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
 axios.interceptors.request.use((request) => {
-  console.log("Hi");
   return request;
 });
 

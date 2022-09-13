@@ -1,6 +1,8 @@
 import { Link, useNavigate } from "react-router-dom";
+import { useContext } from "react";
 import Cookies from "js-cookie";
 import "./index.css";
+import { cartContext } from "../../App";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -8,6 +10,8 @@ const Header = () => {
     Cookies.remove("jwt-token");
     navigate("/login");
   };
+
+  const { state } = useContext(cartContext);
 
   return (
     <nav className="navbar">
@@ -25,7 +29,10 @@ const Header = () => {
         </li>
         <li>
           <Link to="/cart" className="link">
-            Cart
+            Cart{" "}
+            {state.cartList.length !== 0 && (
+              <span className="cart-count">{state.cartList.length}</span>
+            )}
           </Link>
         </li>
         <li onClick={onLogout}>

@@ -8,7 +8,6 @@ interface Props {
   each: IProductData;
 }
 const SimilarProducts = ({ each }: Props) => {
-  console.log("HI");
   return (
     <li className="similar-product-card">
       <img

@@ -5,22 +5,76 @@ import Cart from "./components/Cart";
 import Home from "./components/Home";
 import Login from "./components/Login";
 import Register from "./components/Register";
-import Product from "./components/Product";
-import { IProductData2 } from "./components/Product";
+import Product, { IProductData2 } from "./components/Product";
+// import { IProductData2 } from "./components/Product";
 
-export const cartContext = createContext({
+export const cartContext = createContext<any>(null);
+
+interface IInitialData {
+  cartList: IProductData2[] | [];
+}
+
+const initialData = {
   cartList: [],
-  changeCartList: (data: IProductData2) => {},
-});
+};
 
 function App() {
-  const [cartList, setCartList] = useState<IProductData2[]>([]);
-  const changeCartList = (data: IProductData2) => {
-    setCartList([...cartList, data]);
+  const [state, setState] = useState<IInitialData>(initialData);
+
+  const incrementQuantity = (id: number) => {
+    setState({
+      cartList: state.cartList.map((each: IProductData2) => {
+        if (each.id === id) {
+          return { ...each, quantity: each.quantity + 1 };
+        }
+        return each;
+      }),
+    });
   };
 
+  const decrementQuantity = (id: number, quantity: number) => {
+    if (quantity === 1) {
+      removeCartItem(id);
+    } else {
+      setState({
+        cartList: state.cartList.map((each: IProductData2) => {
+          if (each.id === id) {
+            return { ...each, quantity: each.quantity - 1 };
+          }
+          return each;
+        }),
+      });
+    }
+  };
+
+  const removeCartItem = (id: number) => {
+    setState({
+      ...state,
+      cartList: state.cartList.filter((each: IProductData2) => {
+        if (each.id !== id) {
+          return true;
+        }
+        return false;
+      }),
+    });
+  };
+
+  // const incrementQunatity = (id:number)=>{
+  //   setState({
+  //     cartList: state.cartList.
+  //   })
+  // }
+
   return (
-    <cartContext.Provider value={{ cartList: [], changeCartList }}>
+    <cartContext.Provider
+      value={{
+        state,
+        setState,
+        incrementQuantity,
+        decrementQuantity,
+        removeCartItem,
+      }}
+    >
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
