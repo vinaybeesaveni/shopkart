@@ -264,7 +264,7 @@ const Product = () => {
           <h1 className="similar-products-heading">Similar Products</h1>
           <ul className="similar-product-list">
             {data.similarProducts.map((each: IProductData) => (
-              <SimilarProducts each={each} key={each.id} />
+              <SimilarProducts each={each} key={each.id + 50} />
             ))}
           </ul>
         </div>

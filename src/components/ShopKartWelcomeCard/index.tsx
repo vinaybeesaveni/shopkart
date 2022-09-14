@@ -8,7 +8,7 @@ const ShopKartWelcomeCard = () => {
   return (
     <div className="login-logo-container">
       <p className="logo">
-        Shop<span className="kart1">Kart</span>
+        Ahex<span className="kart1">Kart</span>
       </p>
       <p className="login-tag">Shop What You Need ...</p>
       <ul className="login-list">

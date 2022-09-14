@@ -17,14 +17,14 @@ const Header = () => {
     <nav className="navbar">
       <Link to="/" style={{ textDecoration: "none" }}>
         <h1 className="logo">
-          Shop<span className="kart">Kart</span>
+          Ahex<span className="kart">Kart</span>
         </h1>
       </Link>
 
       <ul className="nav-list">
         <li>
-          <Link to="/about" className="link">
-            About
+          <Link to="/profile" className="link">
+            Profile
           </Link>
         </li>
         <li>

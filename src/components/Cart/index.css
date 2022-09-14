@@ -40,7 +40,7 @@
 }
 .order-now-container {
   width: 300px;
-  height: 320px;
+  height: 330px;
   background-color: white;
   margin-left: 20px;
   padding: 15px;
@@ -85,6 +85,11 @@
   font-size: 14px;
 }
 .order-now-discount {
+  color: rgb(33, 172, 75);
+  font-family: "Bree Serif";
+  font-weight: 300;
+}
+.order-now-free-delivery {
   margin-top: 0;
   color: rgb(33, 172, 75);
   font-family: "Bree Serif";
@@ -117,7 +122,7 @@
   justify-content: center;
 }
 .order-now-btn {
-  background-color: #0b69ff;
+  background-color: #7d36b7;
   color: white;
   border: none;
   width: 100px;

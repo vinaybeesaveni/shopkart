@@ -4,6 +4,7 @@ import { cartContext } from "../../App";
 import { IProductData2 } from "../Product";
 import CartItem from "../CartItem";
 import Header from "../Header";
+import Footer from "../Footer";
 import "./index.css";
 
 const Cart = () => {
@@ -47,7 +48,7 @@ const Cart = () => {
               </div>
               <div className="order-now-actual-price">
                 <p className="order-now-delivery-heading">Delivery Charges</p>
-                <p className="order-now-discount">FREE Delivery</p>
+                <p className="order-now-free-delivery">FREE Delivery</p>
               </div>
               <div className="total-price-container">
                 <p className="total-price">Total Price</p>
@@ -63,6 +64,7 @@ const Cart = () => {
           </div>
         )}
       </div>
+      <Footer />
     </>
   );
 };

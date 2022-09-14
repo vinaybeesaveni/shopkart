@@ -39,7 +39,7 @@ const Register2 = () => {
     validation.fullName = false;
     let error = "";
     if (value === "") {
-      error = "Required";
+      error = "Full Name Required";
     } else if (value.length < 3) {
       error = "Name should be of min 3 characters";
     } else if (
@@ -60,7 +60,7 @@ const Register2 = () => {
     validation.phone = false;
     let error = "";
     if (value === "") {
-      error = "Required";
+      error = "Phone Number Required";
     } else if (value.length !== 10) {
       error = "Min 10 characters";
     } else {
@@ -79,7 +79,7 @@ const Register2 = () => {
       /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
     if (value === "") {
-      error = "Required";
+      error = "Email Required";
     } else if (!re.test(value.toLocaleLowerCase())) {
       error = "Not a valid format";
     } else {
@@ -96,7 +96,7 @@ const Register2 = () => {
     const re =
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
     if (value === "") {
-      error = "Required";
+      error = "Password Required";
     } else if (!re.test(value)) {
       error =
         "Password should contain atleast one lowercase, uppercase, number, special character with minimum length 8";
@@ -113,7 +113,7 @@ const Register2 = () => {
     let password = formValues.password;
     let error = "";
     if (value === "") {
-      error = "Required";
+      error = "Confirm Passowrd Required";
     } else if (value !== password) {
       error = "Passwords do not match";
     } else {

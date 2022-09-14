@@ -34,7 +34,7 @@ const Footer = () => (
         Help
       </a>
       <a className="footer-link" href="#">
-        Sell on Shopkart
+        Sell on Ahexkart
       </a>
       <a className="footer-link" href="#">
         Return Centres
@@ -48,7 +48,7 @@ const Footer = () => (
     </div>
     <div className="footer-middle-section">
       <h1 className="logo">
-        Shop<span className="kart">Kart</span>
+        Ahex<span className="kart">Kart</span>
       </h1>
       <div className="social-media-icons-container">
         <a href="https://www.instagram.com" target="_blank">
@@ -71,7 +71,7 @@ const Footer = () => (
         </a>
       </div>
       <p className="copyright-tag">All Rights Reserved</p>
-      <p className="copyright-tag">&#169; 2022 Copyright: Shopkart.com</p>
+      <p className="copyright-tag">&#169; 2022 Copyright: Ahexkart.com</p>
     </div>
     <div className="footer-right-section">
       <div className="address-container">
@@ -84,7 +84,7 @@ const Footer = () => (
       </div>
       <div className="address-container">
         <HiMail className="contact-icon" />
-        <span className="contact-span">info@shopkart.com</span>
+        <span className="contact-span">info@ahexkart.com</span>
       </div>
       <div className="address-container">
         <AiFillQuestionCircle className="contact-icon" />

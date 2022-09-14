@@ -56,7 +56,7 @@ function Home() {
           Authorization: `Bearer ${jwtToken}`,
         },
       }).then((response) => {
-        console.log(response);
+        // console.log(response);
         const data = response.data.products.map((each: IProductData) => {
           return {
             id: each.id,
@@ -68,6 +68,7 @@ function Home() {
             price: each.price,
           };
         });
+        console.log(response);
         if (response.status === 200) {
           renderData(data);
           setApiStatus(apiStatusConstants.success);
