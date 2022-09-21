@@ -1,4 +1,4 @@
-import { FormEvent, useState, ChangeEvent } from "react";
+import { FormEvent, useState, ChangeEvent, useContext } from "react";
 import { BsFillPersonFill } from "react-icons/bs";
 import { MdEmail } from "react-icons/md";
 import { AiFillPhone } from "react-icons/ai";
@@ -8,6 +8,7 @@ import "./index.css";
 import Cookies from "js-cookie";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import ShopKartWelcomeCard from "../ShopKartWelcomeCard";
+import { ProfileContext } from "../../App";
 
 const initialValues = {
   fullName: "",
@@ -33,6 +34,7 @@ const Register2 = () => {
   const [passwordError, setPasswordErrror] = useState("");
   const [confirmPasswordError, setConfirmPasswordError] = useState("");
   const navigate = useNavigate();
+  const { setUserData } = useContext(ProfileContext);
 
   const validateFullName = () => {
     const value = formValues.fullName.trim();
@@ -134,6 +136,8 @@ const Register2 = () => {
     const keys = Object.keys(validation);
     let value = keys.every((key) => validation[key]);
     if (value) {
+      const { fullName, email, phone } = formValues;
+      setUserData({ fullName, email, phone });
       navigate("/login");
     }
   };

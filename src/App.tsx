@@ -9,6 +9,7 @@ import Product, { IProductData2 } from "./components/Product";
 // import { IProductData2 } from "./components/Product";
 
 export const cartContext = createContext<any>(null);
+export const ProfileContext = createContext<any>(null);
 
 interface IInitialData {
   cartList: IProductData2[] | [];
@@ -18,8 +19,31 @@ const initialData = {
   cartList: [],
 };
 
+export interface IAddress {
+  addressName: string;
+  houseNo: string;
+  addressOne: string;
+  addressTwo: string;
+  landmark: string;
+  city: string;
+  pincode: string;
+}
+
+export const initialValues = {
+  addressName: "",
+  houseNo: "",
+  addressOne: "",
+  addressTwo: "",
+  landmark: "",
+  city: "",
+  pincode: "",
+};
+
 function App() {
   const [state, setState] = useState<IInitialData>(initialData);
+  const [userData, setUserData] = useState<any>(null);
+  const [profileArray, setProfileArray] = useState<IAddress[] | []>([]);
+  const [addressNamesArray, setAddressNamesArray] = useState<string[] | []>([]);
 
   const incrementQuantity = (id: number) => {
     setState({
@@ -66,24 +90,30 @@ function App() {
   // }
 
   return (
-    <cartContext.Provider
-      value={{
-        state,
-        setState,
-        incrementQuantity,
-        decrementQuantity,
-        removeCartItem,
-      }}
-    >
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/product/:id" element={<Product />} />
-      </Routes>
-    </cartContext.Provider>
+    <ProfileContext.Provider value={{ setUserData, userData }}>
+      <cartContext.Provider
+        value={{
+          state,
+          setState,
+          incrementQuantity,
+          decrementQuantity,
+          removeCartItem,
+          profileArray,
+          setProfileArray,
+          addressNamesArray,
+          setAddressNamesArray,
+        }}
+      >
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/product/:id" element={<Product />} />
+        </Routes>
+      </cartContext.Provider>
+    </ProfileContext.Provider>
   );
 }
 

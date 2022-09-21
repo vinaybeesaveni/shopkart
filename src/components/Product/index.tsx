@@ -1,7 +1,7 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 import { useEffect, useState, useContext, ChangeEvent } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { ThreeDots } from "react-loader-spinner";
 import { BiStore } from "react-icons/bi";
 import {
@@ -74,6 +74,8 @@ const Product = () => {
   const [apiStatus, setApiStatus] = useState(apiStatusConstants.initial);
   const [showMore, setShowMore] = useState(false);
   const [quantity, setQunatity] = useState(1);
+  const { addressNamesArray } = useContext(cartContext);
+  const navigate = useNavigate();
 
   const changeQuantity = (event: ChangeEvent<HTMLSelectElement>) => {
     setQunatity(+event.target.value);
@@ -128,6 +130,10 @@ const Product = () => {
     }
   };
   // console.log(state);
+
+  const navigateToProfile = () => {
+    navigate("/profile");
+  };
 
   const quantityArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   const renderSuccessView = () => {
@@ -225,9 +231,18 @@ const Product = () => {
           </p>
           <p className="delivery-address">
             <HiOutlineLocationMarker className="delivery-location-icon" />
-            <span className="delivery-location-span">
-              Deliver to Vinay - Mandal, District, 555555
-            </span>
+            <span className="delivery-location-span">Deliver to </span>
+            {addressNamesArray.length === 0 ? (
+              <button onClick={() => navigateToProfile()}>Add Address</button>
+            ) : (
+              <select>
+                {addressNamesArray.map((each: string) => (
+                  <option value={each} key={each + "1"}>
+                    {each}
+                  </option>
+                ))}
+              </select>
+            )}
           </p>
           <p className="delivery-availability">{data.availability}</p>
           <p className="product-style">

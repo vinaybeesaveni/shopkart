@@ -1,11 +1,13 @@
 import { AiFillPhone } from "react-icons/ai";
-import { useState, ChangeEvent, FormEvent } from "react";
+import { useState, ChangeEvent, FormEvent, useContext } from "react";
 import { RiLockPasswordFill } from "react-icons/ri";
 import "./index.css";
 import { Link, useNavigate, Navigate } from "react-router-dom";
 import axios from "axios";
 import Cookies from "js-cookie";
-import { GiConsoleController } from "react-icons/gi";
+// import { GiConsoleController } from "react-icons/gi";
+import { signInWithGoogle } from "../../Firebase";
+import { ProfileContext } from "../../App";
 const initialValues = {
   loginPhoneNumber: "",
   loginPassword: "",
@@ -27,14 +29,14 @@ const Login = () => {
   // );
   const navigate = useNavigate();
   const [formValues, setFormValues] = useState(initialValues);
+  const { setUserData } = useContext(ProfileContext);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setFormValues({ ...formValues, [name]: value });
   };
 
-  const onFormSubmit = (event: FormEvent) => {
-    event?.preventDefault();
+  const postDetails = () => {
     const data = { username: "rahul", password: "rahul@2021" };
     axios({
       method: "POST",
@@ -49,6 +51,31 @@ const Login = () => {
       .catch((error) => {
         console.log(error);
       });
+  };
+
+  const onFormSubmit = (event: FormEvent | any) => {
+    event?.preventDefault();
+    postDetails();
+  };
+
+  const loginThroughGoogle = () => {
+    postDetails();
+  };
+
+  const onLoginWithGoogle = () => {
+    const promise = signInWithGoogle();
+    promise
+      .then((result) => {
+        console.log(result);
+        const { user } = result;
+        loginThroughGoogle();
+        setUserData({
+          fullName: user.displayName,
+          email: user.email,
+          phone: user.phoneNumber,
+        });
+      })
+      .catch((error) => console.log(error));
   };
 
   const jwt = Cookies.get("jwt-token");
@@ -93,6 +120,7 @@ const Login = () => {
       <p className="register-tag">
         Don't have an account ? <Link to="/register">Register here</Link>
       </p>
+      <button onClick={onLoginWithGoogle}>Sign In With Google</button>
     </div>
   );
 };
