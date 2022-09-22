@@ -7,9 +7,34 @@ import Header from "../Header";
 import "./index.css";
 import { Navigate } from "react-router-dom";
 import { IAddress, initialValues } from "../../App";
+import axios from "axios";
+
+const apiStatusConstants = {
+  initial: "INITIAL",
+  success: "SUCCESS",
+  loading: "LOADING",
+  failure: "FAILURE",
+};
+
+interface IPinData {
+  Country: string;
+  District: string;
+  Name: string;
+  State: string;
+}
+// const initialValues = {
+//   Country:'',
+//   District:'',
+//   Name:'',
+//   State: ''
+// }
 
 const Profile = () => {
   const [addressValues, setAddressValues] = useState<IAddress>(initialValues);
+  const [pincode, setPinCode] = useState<string>("");
+  const [isPinValid, setValidPin] = useState(true);
+  const [apiStatus, setApiStatus] = useState(apiStatusConstants.initial);
+  const [data, setData] = useState<IPinData[] | []>([]);
   const {
     profileArray,
     setProfileArray,
@@ -28,6 +53,11 @@ const Profile = () => {
     setAddressValues({ ...addressValues, [name]: value });
   };
 
+  const handlePinChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setPinCode(event.target.value);
+    setValidPin(event.target.value.length < 6 ? true : false);
+  };
+
   const deleteAddress = (name: string) => {
     setProfileArray(
       profileArray.filter((each: IAddress) => each.addressName !== name)
@@ -35,6 +65,44 @@ const Profile = () => {
     setAddressNamesArray(
       addressNamesArray.filter((each: string) => each !== name)
     );
+  };
+
+  const searchCity = () => {
+    console.log(pincode);
+    axios({
+      method: "GET",
+      url: `https://api.postalpincode.in/pincode/${pincode}`,
+    }).then((response) => {
+      console.log(response.data[0].PostOffice);
+      const formattedData = response.data[0].PostOffice.map(
+        (each: IPinData) => ({
+          Country: each.Country,
+          State: each.State,
+          Name: each.Name,
+          District: each.District,
+        })
+      );
+      setData(formattedData);
+      setApiStatus(apiStatusConstants.success);
+    });
+  };
+  const renderSuccessView = () => (
+    <select className="pincode-select-list">
+      {data.map((each: IPinData) => (
+        <option key={each.Name} value={each.Name}>
+          {each.Name}
+        </option>
+      ))}
+    </select>
+  );
+
+  const renderCityList = () => {
+    switch (apiStatus) {
+      case apiStatusConstants.success:
+        return renderSuccessView();
+      default:
+        return null;
+    }
   };
 
   const { userData } = useContext(ProfileContext);
@@ -104,6 +172,27 @@ const Profile = () => {
             <p>No Addresses</p>
           )}
 
+          <div>
+            <input
+              type="text"
+              placeholder="Enter Pincode"
+              className="pincode-input"
+              maxLength={6}
+              value={pincode}
+              onChange={(event) =>
+                !isNaN(Number(event.target.value)) && handlePinChange(event)
+              }
+              minLength={6}
+            />
+            <button
+              className={!isPinValid ? "search-pincode-btn" : "disabled-btn"}
+              disabled={isPinValid}
+              onClick={searchCity}
+            >
+              Search
+            </button>
+          </div>
+          {renderCityList()}
           <div>
             <Popup
               trigger={<button className="add-address-btn">Add Address</button>}

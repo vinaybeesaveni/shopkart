@@ -253,7 +253,7 @@
 }
 .delivery-address {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
 }
 .delivery-location-span {
   color: #007185;
@@ -296,10 +296,9 @@
   display: flex;
   align-items: center;
   justify-content: space-around;
-  background-color: rgb(141, 141, 219);
+  background-color: #7d36b7;
   color: white;
   height: 30px;
-  border-radius: 6px;
   width: 130px;
 }
 .heart-icon {
@@ -334,4 +333,25 @@
   display: flex;
   align-items: center;
   width: 100%;
+}
+.add-address-btn-product {
+  background-color: #7d36b7;
+  color: white;
+  border: none;
+  width: 100px;
+  height: 33px;
+  box-shadow: 5px 5px 10px rgb(192, 190, 190);
+  cursor: pointer;
+  margin-left: 10px;
+}
+.select-address {
+  width: 100px;
+  height: 30px;
+  margin-left: 15px;
+  border: 1px solid rgb(173, 168, 168);
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: "Bree Serif";
+  font-size: 15px;
+  padding-left: 5px;
 }

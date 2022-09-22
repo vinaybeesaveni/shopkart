@@ -233,9 +233,14 @@ const Product = () => {
             <HiOutlineLocationMarker className="delivery-location-icon" />
             <span className="delivery-location-span">Deliver to </span>
             {addressNamesArray.length === 0 ? (
-              <button onClick={() => navigateToProfile()}>Add Address</button>
+              <button
+                onClick={() => navigateToProfile()}
+                className="add-address-btn-product"
+              >
+                Add Address
+              </button>
             ) : (
-              <select>
+              <select className="select-address">
                 {addressNamesArray.map((each: string) => (
                   <option value={each} key={each + "1"}>
                     {each}
