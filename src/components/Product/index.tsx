@@ -75,6 +75,7 @@ const Product = () => {
   const [showMore, setShowMore] = useState(false);
   const [quantity, setQunatity] = useState(1);
   const { addressNamesArray } = useContext(cartContext);
+  const dataUrl = `https://apis.ccbp.in/products/${id}`;
   const navigate = useNavigate();
 
   const changeQuantity = (event: ChangeEvent<HTMLSelectElement>) => {
@@ -93,7 +94,7 @@ const Product = () => {
     setApiStatus(apiStatusConstants.loading);
     axios({
       method: "get",
-      url: `https://apis.ccbp.in/products/${id}`,
+      url: dataUrl,
       headers: {
         Authorization: `Bearer ${jwtToken}`,
       },
@@ -115,7 +116,7 @@ const Product = () => {
       setData(data);
       setApiStatus(apiStatusConstants.success);
     });
-  }, [id]);
+  }, [dataUrl]);
 
   const changeShowMore = () => {
     setShowMore((prevState) => !prevState);

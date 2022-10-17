@@ -1,0 +1,149 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap");
+.search-results-container {
+  min-height: 90vh;
+  padding: 10px;
+  display: flex;
+  align-items: flex-start;
+  /* justify-content: space-between; */
+}
+.filters-container {
+  width: 16vw;
+  box-shadow: 10px 10px 10px rgb(215, 213, 213);
+  padding-bottom: 20px;
+  align-self: stretch;
+  padding-left: 20px;
+}
+.products-container {
+  max-width: 80%;
+}
+.filters-container h2 {
+  font-family: "Bree Serif";
+  font-weight: 300;
+  margin-top: 0;
+  width: 100px;
+  /* flex-grow: 1; */
+}
+.category-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 80%;
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.category-list li {
+  display: flex;
+  align-items: center;
+}
+.category-list li input {
+  margin-right: 10px;
+}
+/* .category-list li input::-ms-check {
+  color: red;
+  background-color: red;
+} */
+.filters-container button {
+  width: 90px;
+  height: 30px;
+  margin-top: 30px;
+  background-color: transparent;
+  border: 1px solid rgb(185, 178, 178);
+  text-transform: uppercase;
+  font-family: "Poppins", sans-serif;
+  font-weight: bold;
+  letter-spacing: 1px;
+  translate: 1000s;
+}
+
+.filters-container button:hover {
+  letter-spacing: 3px;
+}
+.product-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  margin-left: 20px;
+  display: flex;
+  /* align-items: center; */
+  flex-wrap: wrap;
+}
+.no-search-results-container {
+  margin-left: 30px;
+}
+.no-results-heading {
+  font-family: "Bree Serif";
+  font-weight: 300;
+  margin-bottom: 20px;
+}
+.viewmore-container {
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+.category-list li {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  font-weight: 300;
+  font-size: 15px;
+  cursor: pointer;
+}
+.category-list li:hover {
+  color: blueviolet;
+}
+.categories-heading {
+  font-family: "Bree Serif";
+  color: grey;
+  font-weight: 200;
+}
+.ratings-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.ratings-list li {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  height: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.ratings-list li:hover {
+  color: blueviolet;
+}
+/* .ratings-list li img {
+  width: 80px;
+  height: 15px;
+} */
+
+.price-list {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+  height: 130px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.price-list li {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  font-size: 14px;
+}
+
+.price-list li:hover {
+  color: blueviolet;
+}
+.loader-container-search-results {
+  width: 80vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

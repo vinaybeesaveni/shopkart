@@ -6,6 +6,7 @@ import Home from "./components/Home";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Product, { IProductData2 } from "./components/Product";
+import SearchResults from "./components/SearchResults";
 // import { IProductData2 } from "./components/Product";
 
 export const cartContext = createContext<any>(null);
@@ -44,6 +45,7 @@ function App() {
   const [userData, setUserData] = useState<any>(null);
   const [profileArray, setProfileArray] = useState<IAddress[] | []>([]);
   const [addressNamesArray, setAddressNamesArray] = useState<string[] | []>([]);
+  const [searchInput, setSearchInput] = useState<string>("");
 
   const incrementQuantity = (id: number) => {
     setState({
@@ -102,6 +104,8 @@ function App() {
           setProfileArray,
           addressNamesArray,
           setAddressNamesArray,
+          searchInput,
+          setSearchInput,
         }}
       >
         <Routes>
@@ -111,6 +115,7 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/product/:id" element={<Product />} />
+          <Route path="/search-results" element={<SearchResults />} />
         </Routes>
       </cartContext.Provider>
     </ProfileContext.Provider>

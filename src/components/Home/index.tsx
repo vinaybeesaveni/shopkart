@@ -7,6 +7,7 @@ import RenderProduct from "../RenderProduct";
 import "./index.css";
 import Header from "../Header";
 import Footer from "../Footer";
+// import { cartContext } from "../../App";
 
 export interface IData {
   id: number;
@@ -36,9 +37,12 @@ const apiStatusConstants = {
 };
 
 function Home() {
+  // const { searchInput } = useContext(cartContext);
   const [data, setData] = useState<IData[]>([]);
   const [paginationValue, setPagination] = useState(15);
   const [apiStatus, setApiStatus] = useState(apiStatusConstants.initial);
+  // const dataUrl =
+  // "https://apis.ccbp.in/products?sort_by=PRICE_HIGH&category=&title_search=&rating=1";
 
   const renderData = (data: IData[]) => {
     setData(data);
@@ -51,7 +55,7 @@ function Home() {
       axios({
         method: "get",
         // url: "https://dummyjson.com/products",
-        url: "https://apis.ccbp.in/products?sort_by=PRICE_HIGH&category=&title_search=&rating=1",
+        url: process.env.REACT_APP_PRODUCTS_URL,
         headers: {
           Authorization: `Bearer ${jwtToken}`,
         },
@@ -88,7 +92,7 @@ function Home() {
     }
   };
 
-  if (jwtToken === undefined) {
+  if (!jwtToken) {
     return <Navigate to="/login" />;
   }
 
@@ -99,7 +103,7 @@ function Home() {
           <RenderProduct each={each} key={each.id} />
         ))}
       </ul>
-      {paginationValue !== data.length && (
+      {paginationValue < data.length && (
         <button className="view-more-btn" onClick={changePagination}>
           View More
         </button>

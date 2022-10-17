@@ -6,6 +6,7 @@ import Footer from "../Footer";
 import Header from "../Header";
 import "./index.css";
 import { Navigate } from "react-router-dom";
+import { ThreeDots } from "react-loader-spinner";
 import { IAddress, initialValues } from "../../App";
 import axios from "axios";
 
@@ -35,6 +36,7 @@ const Profile = () => {
   const [isPinValid, setValidPin] = useState(true);
   const [apiStatus, setApiStatus] = useState(apiStatusConstants.initial);
   const [data, setData] = useState<IPinData[] | []>([]);
+  const pinCodeUrl = `https://api.postalpincode.in/pincode/${pincode}`;
   const {
     profileArray,
     setProfileArray,
@@ -69,23 +71,30 @@ const Profile = () => {
 
   const searchCity = () => {
     console.log(pincode);
+    setApiStatus(apiStatusConstants.loading);
     axios({
       method: "GET",
-      url: `https://api.postalpincode.in/pincode/${pincode}`,
-    }).then((response) => {
-      console.log(response.data[0].PostOffice);
-      const formattedData = response.data[0].PostOffice.map(
-        (each: IPinData) => ({
-          Country: each.Country,
-          State: each.State,
-          Name: each.Name,
-          District: each.District,
-        })
-      );
-      setData(formattedData);
-      setApiStatus(apiStatusConstants.success);
-    });
+      url: pinCodeUrl,
+    })
+      .then((response) => {
+        console.log(response.data[0].PostOffice);
+        const formattedData = response.data[0].PostOffice.map(
+          (each: IPinData) => ({
+            Country: each.Country,
+            State: each.State,
+            Name: each.Name,
+            District: each.District,
+          })
+        );
+        setData(formattedData);
+        setApiStatus(apiStatusConstants.success);
+      })
+      .catch((error) => {
+        console.log(error);
+        setApiStatus(apiStatusConstants.failure);
+      });
   };
+
   const renderSuccessView = () => (
     <select className="pincode-select-list">
       {data.map((each: IPinData) => (
@@ -96,10 +105,27 @@ const Profile = () => {
     </select>
   );
 
+  const renderLoadingView = () => (
+    <div className="pin-loader-container">
+      <ThreeDots
+        height="80"
+        width="60"
+        radius="5"
+        color="black"
+        ariaLabel="three-dots-loading"
+      />
+    </div>
+  );
+  const renderFailurView = () => <p>Failed</p>;
+
   const renderCityList = () => {
     switch (apiStatus) {
       case apiStatusConstants.success:
         return renderSuccessView();
+      case apiStatusConstants.loading:
+        return renderLoadingView();
+      case apiStatusConstants.failure:
+        return renderFailurView();
       default:
         return null;
     }

@@ -1,4 +1,5 @@
 import { AiFillPhone } from "react-icons/ai";
+import { FcGoogle } from "react-icons/fc";
 import { useState, ChangeEvent, FormEvent, useContext } from "react";
 import { RiLockPasswordFill } from "react-icons/ri";
 import "./index.css";
@@ -30,6 +31,7 @@ const Login = () => {
   const navigate = useNavigate();
   const [formValues, setFormValues] = useState(initialValues);
   const { setUserData } = useContext(ProfileContext);
+  const dataUrl = "https://apis.ccbp.in/login";
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -40,7 +42,7 @@ const Login = () => {
     const data = { username: "rahul", password: "rahul@2021" };
     axios({
       method: "POST",
-      url: "https://apis.ccbp.in/login",
+      url: dataUrl,
       data: JSON.stringify(data),
     })
       .then((response) => {
@@ -120,7 +122,10 @@ const Login = () => {
       <p className="register-tag">
         Don't have an account ? <Link to="/register">Register here</Link>
       </p>
-      <button onClick={onLoginWithGoogle}>Sign In With Google</button>
+      <button onClick={onLoginWithGoogle} className="sign-in-with-google">
+        <FcGoogle className="google-icon" />
+        Sign In With Google
+      </button>
     </div>
   );
 };

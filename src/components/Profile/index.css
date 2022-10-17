@@ -173,3 +173,7 @@
   border: 1px solid rgb(213, 210, 210);
   padding-left: 5px;
 }
+.pin-loader-container {
+  height: 30px;
+  margin-bottom: 20px;
+}

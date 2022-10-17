@@ -61,6 +61,24 @@
   margin-top: 0;
   margin-top: 20px;
 }
+.sign-in-with-google {
+  width: 200px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background-color: white;
+  border: 1px solid rgb(236, 232, 232);
+  border-radius: 5px;
+  font-size: 16px;
+  font-family: "Bree serif";
+  font-weight: 300;
+  box-shadow: 1px 1px 10px rgb(201, 199, 199), -1px -1px 10px rgb(201, 199, 199);
+  cursor: pointer;
+}
+.google-icon {
+  font-size: 25px;
+}
 /* .login-container{
     display: flex;
     align-items: center;
